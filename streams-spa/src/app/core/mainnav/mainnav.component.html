@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Example icon" (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Streams</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-container" (backdropClick)="close('backdrop')" >
+  <mat-sidenav #sidenav (keydown.escape)="close('escape')" disableClose [mode]="'over'">
+    <!-- SIDE NAV CONTENT  -->
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <!-- MAIN CONTENT  -->
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<app-overlay delay="300">
+  <span class="spinner"></span>&nbsp;&nbsp;&nbsp;Loading
+</app-overlay>
+

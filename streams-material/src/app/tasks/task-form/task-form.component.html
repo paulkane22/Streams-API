@@ -1,0 +1,72 @@
+<h2 mat-dialog-title>{{myFormTitle}}</h2>
+<form [formGroup]="myForm" (ngSubmit)="submitForm()">
+  <!-- Value: {{myForm.value | json}} -->
+
+  <mat-grid-list cols="2" rowHeight="300px">
+    <mat-grid-tile>
+      <div class="controls-container">
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="title" formControlName="title" />
+          <mat-hint>Required</mat-hint>
+          <mat-error *ngIf="title.invalid && title.touched">
+            Title is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="description"
+            formControlName="description"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="f50">
+          <mat-label>Last Updated</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="last_updated"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="last_updated.invalid && last_updated.touched">
+            Last updated is required</mat-error>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <div class="controls-container">
+          <div class="add-bottom-padding">
+          <mat-radio-group formControlName="status">
+            <mat-radio-button value="Not Started">None</mat-radio-button>
+            <mat-radio-button value="In Progress">In Progress</mat-radio-button>
+            <mat-radio-button value="On Hold">On Hold</mat-radio-button>
+          </mat-radio-group>
+        </div>
+          
+        <!-- </mat-form-field> -->
+
+        <mat-checkbox class="example-margin" formControlName="active">Complete</mat-checkbox>
+
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-dialog-actions align="end">
+    <button
+      mat-raised-button
+      color="primary"
+      [mat-dialog-close]="true"
+      (click)="onSubmit()"
+      [disabled]="myForm.invalid"
+      cdkFocusInitial >
+      {{myButtonText}}
+    </button>
+    <button mat-button mat-dialog-close (click)="onClose()">Cancel</button>
+  </mat-dialog-actions>
+</form>

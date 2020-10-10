@@ -1,0 +1,27 @@
+table {
+  width: 100%;
+}
+
+.mainContent {
+  margin: 10px 25px;
+}
+
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+
+
+
+mat-sidenav {
+  padding-top: 65px;
+}

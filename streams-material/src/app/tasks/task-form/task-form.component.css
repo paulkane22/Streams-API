@@ -1,0 +1,33 @@
+mat-form-field { 
+    width:100%;
+    min-height: 80px;
+}
+
+.controls-container {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    vertical-align: top;
+
+}
+
+.add-bottom-padding{
+    padding-bottom: 10px;
+}
+
+mat-radio-group mat-radio-button {
+    margin-left: 10px;
+    min-height: 80px;
+}
+
+mat-checkbox {
+    margin-left: 10px;
+    min-height: 80px;
+}
+
+
+.f50 {
+    border: 1px;
+    border-color: purple;
+    width: 40%;
+}
