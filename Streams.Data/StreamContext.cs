@@ -16,6 +16,7 @@ namespace Streams.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<AppTask> AppTasks { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{

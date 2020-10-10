@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 
@@ -8,19 +9,27 @@ import { MatSidenav } from '@angular/material/sidenav';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  @ViewChild('sidenav') sidenav: MatSidenav;
-  title = 'streams-material';
+export class AppComponent implements OnInit {
 
-  sideBarOpen = true;
-  reason = '';
+  projects: any;
 
-  close(reason: string) {
-    this.reason = reason;
-    this.sidenav.close();
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.getProjects();
   }
 
-  sideBarToggler() {
-    this.sideBarOpen = !this.sideBarOpen;
-  }
+    getProjects() {
+
+      this.http.get('http://localhost:56563/api/projects').subscribe(response => {
+        this.projects = response;
+
+      }, error => {
+        console.log(error);
+      });
+
+    }
+
+
+
 }
