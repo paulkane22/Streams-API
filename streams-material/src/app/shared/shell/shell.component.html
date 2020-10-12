@@ -1,24 +1,41 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" *ngIf="accountService.currentUser$ | async"
     (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
     </button>
     <span>Streams</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <span *ngIf="accountService.currentUser$ | async">Welcome {{username}}</span>
+    <button mat-icon-button class="example-icon"  [mat-menu-trigger-for]="menu" *ngIf="(accountService.currentUser$ | async)">
         <mat-icon>account_box</mat-icon>
     </button>
 </mat-toolbar>
 
 
-<mat-sidenav-container class="example-container">
+<mat-menu x-position="before" #menu="matMenu">
+  <!-- <button mat-menu-item  *ngIf="(accountService.currentUser$ | async) === null" routerLink='/login'>
+    <mat-icon>login</mat-icon>
+    Log In
+  </button> -->
+  <button mat-menu-item *ngIf="accountService.currentUser$ | async">
+    <mat-icon>face</mat-icon>
+    Edit Profile
+  </button>
+  <button mat-menu-item (click)="logout()" *ngIf="accountService.currentUser$ | async" routerLink='/'>
+    <mat-icon>exit_to_app</mat-icon>
+    Log Out
+  </button>
+</mat-menu>
+
+
+<mat-sidenav-container class="example-container" >
     <mat-sidenav #sidenav [mode]="(isHandset$ | async) ? 'over' : 'side'" [(opened)]="opened">            
       
-      <div class="side_header">
-        <h2>Paul J Kane</h2>
+      <div class="side_header" *ngIf="accountService.currentUser$ | async">
+        <h3 *ngIf="accountService.currentUser$ | async">{{username}}</h3>
       </div>  
 
-        <mat-nav-list>
+        <mat-nav-list *ngIf="accountService.currentUser$ | async" >
             <a mat-list-item routerLink='/' routerLinkActive ><mat-icon mat-list-icon color="primary">home</mat-icon> Home </a>
             <a mat-list-item routerLink='/tasks' routerLinkActive ><mat-icon mat-list-icon color="primary">code</mat-icon><span matBadge="{{myTaskNumber}}" matBadgeOverlap="false">Tasks</span> </a>
             <!-- <a mat-list-item routerLink='/todo' routerLinkActive ><mat-icon mat-list-icon color="primary">list</mat-icon> ToDo </a> -->

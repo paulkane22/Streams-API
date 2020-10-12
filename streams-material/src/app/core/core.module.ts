@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DataService } from './services/data.service';
 import { SharedModule } from '../shared/shared.module';
 import { TaskService } from './services/task.service';
+import { AccountService } from './services/account.service';
 
 
 @NgModule({
@@ -13,6 +14,6 @@ import { TaskService } from './services/task.service';
   ],
   exports: [
   ],
-  providers: [DataService, TaskService]
+  providers: [DataService, TaskService, AccountService]
 })
 export class CoreModule { }

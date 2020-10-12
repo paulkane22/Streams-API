@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { User } from 'src/_models/user';
+import { AccountService } from './core/services/account.service';
 
 
 
@@ -13,23 +15,26 @@ export class AppComponent implements OnInit {
 
   projects: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private accountService: AccountService) {}
 
   ngOnInit() {
-    this.getProjects();
+    // this.getProjects();
+    this.setCurrentUser();
   }
 
-    getProjects() {
+    // getProjects() {
 
-      this.http.get('http://localhost:56563/api/projects').subscribe(response => {
-        this.projects = response;
+    //   this.http.get('http://localhost:56563/api/projects').subscribe(response => {
+    //     this.projects = response;
+    //   }, error => {
+    //     console.log(error);
+    //   });
+    // }
 
-      }, error => {
-        console.log(error);
-      });
-
+    setCurrentUser()
+    {
+      const user: User = JSON.parse(localStorage.getItem('user'));
+      this.accountService.setCurrentUser(user);
     }
-
-
 
 }

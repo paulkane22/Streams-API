@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import { HomePageComponent } from '../home-page/home-page.component';
 import { TaskFormComponent } from './task-form/task-form.component';
 
 

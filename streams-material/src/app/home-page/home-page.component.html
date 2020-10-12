@@ -1,7 +1,10 @@
 
 
-<div class="hero">
-    <h2>Angular Streams</h2>
-    <p>Welcome to stream manager...</p>
+<div class="hero" *ngIf="(accountService.currentUser$ | async)">
+    <h1>Angular Streams</h1>
+    <p>Welcome Stream Manager
+    </p>
 </div>
+
+<app-login  *ngIf="(accountService.currentUser$ | async) === null"></app-login>
 

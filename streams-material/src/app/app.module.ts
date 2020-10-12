@@ -15,6 +15,7 @@ import { TasksModule } from './tasks/tasks.module';
 import { TasksComponent } from './tasks/tasks.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { AuthModule } from './auth/auth.module';
 
 
 
@@ -32,6 +33,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     SharedModule,
     CoreModule,
     TasksModule,
+    AuthModule,
     TodoListModule,
     AppRoutingModule,
     HttpClientModule,
