@@ -6,6 +6,9 @@ import { map, shareReplay } from 'rxjs/operators';
 import { AccountService } from 'src/app/core/services/account.service';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { User } from 'src/_models/user';
 
 @Component({
   selector: 'app-shell',
@@ -17,7 +20,8 @@ export class ShellComponent implements OnInit {
 
   opened = false;
   myTaskNumber = 5;
-  username = 'Paul'
+  username = 'Paul';
+  user: User;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Handset])
   .pipe(
@@ -25,7 +29,11 @@ export class ShellComponent implements OnInit {
     shareReplay()
   );
 
-  constructor(private breakpointObserver: BreakpointObserver, public accountService: AccountService) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    public accountService: AccountService,
+    private router: Router,
+    private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
   }
@@ -33,5 +41,6 @@ export class ShellComponent implements OnInit {
   logout() {
     this.sidenav.close();
     this.accountService.logout();
+    this.router.navigateByUrl('/');
   }
 }

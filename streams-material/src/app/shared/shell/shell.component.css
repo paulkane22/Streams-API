@@ -22,3 +22,8 @@
   .example-spacer {
     flex: 1 1 auto;
   }
+
+  .active-list-item {
+
+    color: rebeccapurple !important; /* Note: You could also use a custom theme */
+  }
