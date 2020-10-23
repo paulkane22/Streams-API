@@ -1,0 +1,92 @@
+<mat-toolbar color="primary">
+  <span>Edit Project 223: {{ myId }}</span>
+</mat-toolbar>
+
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="my-header-image"></div>
+    <mat-card-title>{{ myProject.name }}</mat-card-title>
+    <mat-card-subtitle>{{ myProject.owner }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="myForm" (ngSubmit)="submitForm()" autocomplete="off">
+      <mat-grid-list cols="2" rowHeight="300px">
+        <mat-grid-tile>
+          <div>
+            <mat-form-field>
+              <mat-label>Project Name</mat-label>
+              <input
+                matInput
+                placeholder="Name"
+                formControlName="projectName"
+              />
+              <mat-hint>Required</mat-hint>
+            </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Owner</mat-label>
+                <input
+                  matInput
+                  placeholder="Owner"
+                  formControlName="owner"
+                />
+                <mat-hint>Required</mat-hint>
+              </mat-form-field>
+              <div class="add-bottom-padding">
+                <mat-radio-group formControlName="priority" color="primary">
+                    <mat-radio-button value="1">High</mat-radio-button>
+                    <mat-radio-button value="2">Medium</mat-radio-button>
+                    <mat-radio-button value="3">Low</mat-radio-button>
+                </mat-radio-group>
+              </div>  
+              <div class="add-bottom-padding">
+                  <mat-checkbox formControlName="active" color="primary">Active Project</mat-checkbox>
+              </div>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div>
+                <mat-form-field>
+                    <mat-select formControlName="priority">
+                        <mat-option value="1">High</mat-option>
+                        <mat-option value="2">Medium</mat-option>
+                        <mat-option value="3">Low</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                  <mat-form-field class="p-50">
+                    <mat-label>Started qw</mat-label>
+                        <input formControlName="started" matInput
+                        [matDatepicker]="picker" placeholder="Start Date  qw"
+                        >
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                  <mat-form-field class="p-50">
+                    <mat-label>Completed</mat-label>
+                        <input formControlName="completed" matInput
+                        [matDatepicker]="picker1" placeholder="Complete Date"
+                        >
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                  <mat-form-field class="p-50">
+                    <mat-label>Deadline</mat-label>
+                        <input formControlName="deadline" matInput
+                        [matDatepicker]="picker2" placeholder="Deadline"
+                        >
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                  </mat-form-field>
+              </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-button mat-dialog-close color="primary">Cancel</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="myForm.invalid">Update</button>
+  </mat-card-actions>
+</mat-card>

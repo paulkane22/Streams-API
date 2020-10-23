@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { User } from 'src/_models/user';
+import { User } from 'src/app/_models/user';
 import { AccountService } from './core/services/account.service';
 
 

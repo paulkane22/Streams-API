@@ -1,29 +1,38 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Streams.API.DTOs;
 using Streams.Common;
 using Streams.Data;
 
 namespace Streams.API.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProjectsController : ControllerBase
     {
         private readonly StreamContext _context;
+        private readonly IMapper _mapper;
 
-        public ProjectsController(StreamContext context)
+        public ProjectsController(StreamContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Projects
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Project>>> GetProjects()
+        public async Task<ActionResult<IEnumerable<ProjectDto>>> GetProjects()
         {
-            return await _context.Projects.ToListAsync();
+            var projects = await _context.Projects.ToListAsync();
+            var projectsToReturn = _mapper.Map<IEnumerable<ProjectDto>>(projects);
+
+            return Ok(projectsToReturn);
         }
 
         // GET: api/Projects/5
@@ -49,6 +58,11 @@ namespace Streams.API.Controllers
             if (id != project.Id)
             {
                 return BadRequest();
+            }
+
+            if (project.ProductId == 0)
+            {
+                project.ProductId = 3;
             }
 
             _context.Entry(project).State = EntityState.Modified;
@@ -78,6 +92,12 @@ namespace Streams.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Project>> PostProject(Project project)
         {
+            //if (project.ProductId == 0)
+            //{
+            //    project.ProductId = 3;
+            //}
+            project.ProductId = 3;
+
             _context.Projects.Add(project);
             await _context.SaveChangesAsync();
 
@@ -104,6 +124,5 @@ namespace Streams.API.Controllers
         {
             return _context.Projects.Any(e => e.Id == id);
         }
-
     }
 }

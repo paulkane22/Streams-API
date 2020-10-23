@@ -1,0 +1,61 @@
+<div class="example-container mat-elevation-z8">
+    <mat-card  class="my-card">
+        <mat-card-header>
+            <mat-card-title>
+                <span>{{project.name}} ({{project.id}})</span>
+            </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+            <form  class="my-form">
+
+            <mat-tab-group mat-align-tabs="start" animationDuration="1000ms">
+                <mat-tab label="Summary">
+                    <table cellspacing="10" class="mat-tab">
+                        <tr>
+                            <td> 
+                                <mat-form-field>
+                                    <mat-label>Name</mat-label>
+                                    <input  matInput  placeholder="Name" [(ngModel)]="project.name"  name="name"  required>
+                                </mat-form-field>    
+                            </td>
+                            <td> 
+                                <mat-form-field>
+                                    <mat-label>Name</mat-label>
+                                    <input  matInput  placeholder="Name" [(ngModel)]="project.name"  name="name"  required>
+                                </mat-form-field>    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> 
+                                <mat-form-field>
+                                    <mat-label>Description</mat-label>
+                                    <input  matInput  placeholder="Name" [(ngModel)]="project.name"  name="name"  required>
+                                </mat-form-field>    
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td> 
+                                <mat-form-field>
+                                    <mat-label>Summary</mat-label>
+                                    <input  matInput  placeholder="Name" [(ngModel)]="project.name"  name="name"  required>
+                                </mat-form-field>    
+                            </td>
+                            <td></td>
+                        </tr>
+                        </table> 
+                </mat-tab>
+                <mat-tab label="Tasks">Tasks</mat-tab>
+                <mat-tab label="History">History</mat-tab>
+            </mat-tab-group>
+
+  
+            </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <!-- Actions go here -->
+            </mat-card-actions>
+    </mat-card>
+
+</div>

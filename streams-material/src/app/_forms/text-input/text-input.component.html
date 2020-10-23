@@ -1,0 +1,30 @@
+<div class="form-group">
+    <mat-form-field autocomplete="off" [floatLabel]="'always'">
+        <mat-label>{{label}}</mat-label>
+        <input  
+          type={{type}}
+          matInput
+          placeholder=''
+          id="name" 
+          [formControl]="ngControl.control"
+          name="name"
+          class="form-control" 
+          [class.is-invalid]="ngControl.touched && ngControl.invalid"
+        />
+        <mat-hint *ngIf="ngControl.control.errors?.required">Required</mat-hint>
+        <!-- <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">Please enter a {{label}}</div> -->
+        <!-- <div *ngIf="ngControl.control.errors?.minlength" class="invalid-feedback">
+            {{label}} must be at least {{ngControl.control.errors.minlength['requiredLength']}}
+        </div>
+        <div *ngIf="ngControl.control.errors?.maxlength" class="invalid-feedback">
+            {{label}} must be at most {{ngControl.control.errors.maxlength['requiredLength']}}
+        </div>
+        <div *ngIf="ngControl.control.errors?.isMatching" class="invalid-feedback">
+            Passwords do not match
+        </div> -->
+      </mat-form-field>
+
+
+</div>
+
+

@@ -1,15 +1,30 @@
+<mat-progress-bar mode="indeterminate" color="error" *ngIf="busyService.visibility | async"></mat-progress-bar>
 <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" *ngIf="(accountService.currentUser$ | async) as user"
-    (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <span  *ngIf="accountService.currentUser$ | async">Streams</span>
-    <span class="example-spacer"></span>
-    <span *ngIf="accountService.currentUser$ | async">Welcome {{username}}</span>
-    <button mat-icon-button class="example-icon"  [mat-menu-trigger-for]="menu" *ngIf="(accountService.currentUser$ | async)">
-        <mat-icon>account_box</mat-icon>
-    </button>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+    *ngIf="accountService.currentUser$ | async as user"
+    (click)="sidenav.toggle()"
+  >
+    <mat-icon>menu</mat-icon>
+    <!-- <mat-icon>menu_open</mat-icon> -->
+  </button>
+  <span *ngIf="accountService.currentUser$ | async">Streams</span>
+  <span class="example-spacer"></span>
+  <span *ngIf="accountService.currentUser$ | async"
+    >Welcome {{ username }}</span
+  >
+  <button
+    mat-icon-button
+    class="example-icon"
+    [mat-menu-trigger-for]="menu"
+    *ngIf="accountService.currentUser$ | async"
+  >
+    <mat-icon>account_box</mat-icon>
+  </button>
 </mat-toolbar>
+
 
 
 <mat-menu x-position="before" #menu="matMenu">
@@ -17,48 +32,109 @@
     <mat-icon>face</mat-icon>
     Edit Profile
   </button>
-  <button mat-menu-item (click)="logout()" *ngIf="accountService.currentUser$ | async" routerLink='/'>
+  <button
+    mat-menu-item
+    (click)="logout()"
+    *ngIf="accountService.currentUser$ | async"
+    routerLink="/"
+  >
     <mat-icon>exit_to_app</mat-icon>
     Log Out
   </button>
 </mat-menu>
 
+<mat-sidenav-container class="example-container">
+  <mat-sidenav
+    #sidenav
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [(opened)]="opened"
+  >
+    <mat-card color="primary">
+      <mat-card-header> 
+        <span>
+          <div mat-card-avatar class="my-header-image"></div>      
+        </span>
+        <span>
+          <mat-card-title>{{ username }}</mat-card-title>
+          <mat-card-subtitle>Operations</mat-card-subtitle>
+        </span>
+        <span class="lock_icon">
+          <button
+            mat-icon-button
+            class="example-icon"
+            (click)="toggleSidebarLock()"
+            *ngIf="!sidebarLocked"
+            color="primary"
+          >
+            <mat-icon>lock_open</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            class="example-icon"
+            (click)="toggleSidebarLock()"
+            *ngIf="sidebarLocked"
+            color="primary"
+          >
+            <mat-icon>lock</mat-icon>
+          </button>
+        </span>
+      </mat-card-header>
 
-<mat-sidenav-container class="example-container" >
-    <mat-sidenav #sidenav [mode]="(isHandset$ | async) ? 'over' : 'side'" [(opened)]="opened">            
-      
-
-      <mat-toolbar>
-        <mat-toolbar-row>
-          <h2> {{username}}</h2>
-        </mat-toolbar-row>
-      </mat-toolbar>
 
 
 
+    <mat-nav-list *ngIf="accountService.currentUser$ | async">
+      <a mat-list-item routerLink="/" style="height: 0"></a>
+      <a
+        mat-list-item
+        routerLink=""
+        (click)="sidenavClose()"
+        routerLinkActive="active1"
+        ><mat-icon mat-list-icon color="primary">home</mat-icon>Home
+      </a>
 
-        <mat-nav-list *ngIf="accountService.currentUser$ | async" >
-            <a mat-list-item routerLink="/" style="height: 0;"></a>
-            <a mat-list-item routerLink='' (click)="sidenav.close()" routerLinkActive="active-list-item"><mat-icon mat-list-icon color="primary">home</mat-icon> Home </a>
-            <a mat-list-item routerLink='/tasks' (click)="sidenav.close()" routerLinkActive="active-list-item"><mat-icon mat-list-icon color="primary">code</mat-icon><span matBadge="{{myTaskNumber}}" matBadgeOverlap="false">MyTasks</span> </a>
-            <!-- <a mat-list-item routerLink='/todo' routerLinkActive ><mat-icon mat-list-icon color="primary">list</mat-icon> ToDo </a> -->
-            
-            <mat-divider></mat-divider>
+      <!-- <a mat-list-item routerLink='/tasks' (click)="sidenavClose()" 
+            routerLinkActive="active1"><mat-icon mat-list-icon color="primary">list_alt</mat-icon>
+                  <span matBadge="{{myTaskNumber}}" matBadgeOverlap="false">MyTasks</span> </a> -->
 
-            <h2 matSubheader>Manage</h2>
-            <a mat-list-item routerLink="/" style="height: 0;"></a>
-            <a mat-list-item routerLink='' (click)="sidenav.close()" routerLinkActive="active-list-item"><mat-icon mat-list-icon color="primary">home</mat-icon> Workstreams </a>
-            <a mat-list-item routerLink='/tasks' (click)="sidenav.close()" routerLinkActive="active-list-item"><mat-icon mat-list-icon color="primary">assessment</mat-icon>Projects </a>
-            <a mat-list-item routerLink='/tasks' (click)="sidenav.close()" routerLinkActive="active-list-item"><mat-icon mat-list-icon color="primary">assignment</mat-icon>Tasks </a>
-            <!-- <a mat-list-item routerLink='/todo' routerLinkActive ><mat-icon mat-list-icon color="primary">list</mat-icon> ToDo </a> -->
-            
+      <!--             
+            <mat-divider></mat-divider> -->
 
-        </mat-nav-list>
+      <h2 matSubheader>Manage</h2>
+      <a mat-list-item routerLink="/" style="height: 0"></a>
 
+      <a
+        mat-list-item
+        routerLink="/projects"
+        (click)="sidenavClose()"
+        routerLinkActive="active"
+        ><mat-icon mat-list-icon color="primary">list_alt</mat-icon>Projects</a
+      >
 
-    </mat-sidenav>
-  
-    <mat-sidenav-content>
-      <ng-content></ng-content>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+      <a
+        mat-list-item
+        routerLink="/tasks"
+        (click)="sidenavClose()"
+        routerLinkActive="active"
+        ><mat-icon mat-list-icon color="primary">list_alt</mat-icon>Tasks
+      </a>
+
+      <h2 matSubheader>Testing</h2>
+      <a mat-list-item routerLink="/" style="height: 0"></a>
+      <a
+        mat-list-item
+        routerLink="/errors"
+        (click)="sidenavClose()"
+        routerLinkActive="active"
+      >
+        <mat-icon mat-list-icon color="primary">assessment</mat-icon> Errors
+      </a>
+    </mat-nav-list>
+
+  </mat-card>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

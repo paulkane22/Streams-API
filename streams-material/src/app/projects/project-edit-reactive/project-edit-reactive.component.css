@@ -1,0 +1,29 @@
+.container-fluid {
+  background-color: white;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar.mat-accent {
+    background: #ffffff;
+  }
+
+.border { 
+  border: solid 1px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.radios {
+  padding-top: 10px;
+  height: 70px;
+}
+
+mat-radio-group mat-radio-button {
+
+  margin-right: 20px;
+}

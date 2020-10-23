@@ -1,0 +1,42 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .example-card {
+    max-width: 800px;
+  }
+  
+  .my-header-image {
+    background-image: url('../../../assets/images/ph_purple.png');
+    background-size: cover;
+  }
+
+  .mat-grid-tile .mat-figure {
+    justify-content: flex-start !important ;
+    align-items: flex-start !important;
+ }
+
+ mat-form-field {
+   width: 100%;
+ }
+
+ .add-bottom-padding{
+  height: 70px;
+  min-height: 70px;
+    margin-top: 15px;
+ }
+
+ mat-radio-group mat-radio-button {
+
+   margin-left: 5px;
+ }
+
+ mat-form-field {
+   height: 80px;
+   min-height: 80px;
+   width: 90%;
+ }
+
+ .p-50 {
+   width: 55%;
+ }

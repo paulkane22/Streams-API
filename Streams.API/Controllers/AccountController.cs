@@ -81,5 +81,11 @@ namespace Streams.API.Controllers
             return await _context.AppUsers.AnyAsync(x => x.UserName == username.ToLower());
         }
 
+
+        [HttpGet("bad-request")]
+        public ActionResult<string> GetBadRequest()
+        {
+            return BadRequest("This is an example bad request");
+        }
     }
 }

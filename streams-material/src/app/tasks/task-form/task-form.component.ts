@@ -15,14 +15,14 @@ export class TaskFormComponent implements OnInit {
   myForm: FormGroup;
   myTask: ITask;
   myID: number;
-  
 
 
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<TaskFormComponent>, 
+    private dialogRef: MatDialogRef<TaskFormComponent>,
     @Inject(MAT_DIALOG_DATA) data
-    ) {
+    )
+    {
       this.myID = data.id;
       if (this.myID !== 0)
       {
@@ -31,6 +31,9 @@ export class TaskFormComponent implements OnInit {
       }
       this.myTask = data;
     }
+
+
+
 
   ngOnInit(): void {
     this.myForm = this.fb.group({

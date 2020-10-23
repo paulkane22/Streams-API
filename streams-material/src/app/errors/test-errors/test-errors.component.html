@@ -1,0 +1,17 @@
+
+<h2>Test Error System </h2>
+
+<button mat-raised-button color="primary" (click)="getbadError()">Test Bad Request</button>
+<button mat-raised-button color="primary" (click)="getbadRegister()">Test Bad Register</button>
+<button mat-raised-button color="primary" routerLink='/notFoundPage'>Test Not Found</button>
+
+<button mat-raised-button color="primary" (click)="testProgressBar()" >Test Progress Bar</button>
+
+<mat-progress-bar color="accent" mode="indeterminate" *ngIf="busyService.visibility | async"></mat-progress-bar>
+<div class="row mt-5" *ngIf="validationErrors.length > 0">
+    <ul class="text-danger">
+        <li *ngFor="let error of validationErrors">
+            {{error}}
+        </li>
+    </ul>
+</div>

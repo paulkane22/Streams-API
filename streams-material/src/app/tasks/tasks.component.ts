@@ -32,8 +32,6 @@ export class TasksComponent implements OnInit, AfterViewInit  {
 
     this.ELEMENT_DATA2 = this.taskService.getTasks();
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA2);
-        // this.dataSource.paginator = this.paginator;
-        // this.dataSource.sort = this.sort;
   }
 
   ngAfterViewInit(): void {
@@ -83,7 +81,7 @@ export class TasksComponent implements OnInit, AfterViewInit  {
       data => {
         this.ELEMENT = data;
         console.log('UPDATING:' + data.title);
-        for (var i in this.ELEMENT_DATA2) {
+        for (let i in this.ELEMENT_DATA2) {
           if (this.ELEMENT_DATA2[i].id === this.ELEMENT.id) {
             console.log('ARRAY:' + this.ELEMENT_DATA2[i].id);
             this.openSnackBar('Edit Task Found');
@@ -100,7 +98,7 @@ export class TasksComponent implements OnInit, AfterViewInit  {
   openSnackBar(message: string): void {
     this.snackBar.open(message, '', {
       duration: 2000,
-      panelClass: ['mat-toolbar','mat-primary']
+      panelClass: ['mat-toolbar', 'mat-primary']
     });
   }
 
