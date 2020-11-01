@@ -1,0 +1,166 @@
+
+.container-fluid {
+    background-color: white;
+    height: 100%;
+  }
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  .mat-table {
+    padding: 0px;
+    margin: 0px;
+  }
+  
+  
+  .example-loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .filter-form-field {
+    margin-left: 10px;
+  }
+  
+  .mat-column-number {
+    flex: 0 0 5% !important;
+    width: 5% !important;
+  }
+  
+  .mat-column-id {
+    flex: 0 0 5% !important;
+    width: 5% !important;
+    overflow-wrap: break-word;
+  }
+  
+  .mat-column-name {
+    flex: 0 0 20% !important;
+    width: 20% !important;
+    overflow-wrap: break-word;
+  
+    font-weight: 500;
+  }
+  
+  .mat-column-project-key {
+    flex: 0 0 5% !important;
+    width: 5% !important;
+    overflow-wrap: break-word;
+  }
+  
+  .mat-column-project-type {
+    flex: 0 0 5% !important;
+    width: 5% !important;
+    overflow-wrap: break-word;
+  }
+
+  .mat-column-organisation {
+    flex: 0 0 5% !important;
+    width: 5% !important;
+    overflow-wrap: break-word;
+  }
+
+  .mat-column-workstream {
+    flex: 0 0 5% !important;
+    width: 5% !important;
+    overflow-wrap: break-word;
+  }
+    
+  .mat-column-completed {
+    flex: 0 0 5% !important;
+    width: 5% !important;
+    overflow-wrap: break-word;
+  }
+  
+  .mat-column-active {
+    flex: 0 0 5% !important;
+    width: 5% !important;
+    overflow-wrap: break-word;
+  }
+    
+  .mat-column-owner {
+    flex: 0 0 5% !important;
+    width: 5% !important;
+    overflow-wrap: break-word;
+  }
+  
+  .mat-column-priority {
+    flex: 0 0 5% !important;
+    width: 5% !important;
+    overflow-wrap: break-word;
+  }
+
+  
+  .mat-column-startDate {
+    flex: 0 0 7% !important;
+    width: 7% !important;
+    overflow-wrap: break-word;
+  }
+  
+  .mat-column-deadlineDate {
+    flex: 0 0 7% !important;
+    width: 10% !important;
+    overflow-wrap: break-word;
+  }
+
+  .mat-column-completedDate {
+    flex: 0 0 7% !important;
+    width: 10% !important;
+    overflow-wrap: break-word;
+  }
+  
+  .mat-column-createdDate {
+    overflow-wrap: break-word;
+    flex: 0 0 7% !important;
+    width: 7% !important;
+  }
+  
+  .mat-column-actions {
+    flex: 0 0 10% !important;
+    width: 10% !important;
+    overflow-wrap: break-word;
+  }
+  
+  .mat-column-project_image {
+    flex: 0 0 5% !important;
+    width: 5% !important;
+    overflow-wrap: break-word;
+  }
+  
+  
+  .list-profile-Image {
+    width: 25px;
+  }
+  
+  .example-element-row:hover {
+    background: whitesmoke;
+  }
+  
+  .mat-toolbar.mat-accent {
+    background: #ffffff;
+  }
+
+.k-icon {
+  padding-top: 2px;
+  vertical-align: middle;
+  font-size: 18px;
+}
+
+.k-formInput {
+  font-size: 12px;
+}
+
+.pageTitle {
+  min-width: 120px;
+}

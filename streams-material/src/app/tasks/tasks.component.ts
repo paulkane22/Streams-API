@@ -113,6 +113,5 @@ export class TasksComponent implements OnInit, AfterViewInit  {
   }
 
   clear_filter() {
-
   }
 }

@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IProject } from 'src/app/_models/project';
 import { environment } from 'src/environments/environment';
 import { AccountService } from './account.service';
+import { NotificationService } from './notification.service';
 
 
 // const httpOptions = {
@@ -22,15 +22,10 @@ export class ProjectService {
   baseUrl = environment.apiUrl;
   projects: IProject[] = [];
 
-  constructor(private http: HttpClient, private accountService: AccountService) { }
+  constructor(private http: HttpClient, private accountService: AccountService, private notificationService: NotificationService) { }
 
   getProjects()
   {
-    // if (this.projects.length > 0 )
-    // {
-    //   return of(this.projects);
-    // }
-
     return this.http.get<IProject[]>(this.baseUrl + 'projects').pipe(
       map(projects => {
         this.projects = projects;
@@ -41,24 +36,16 @@ export class ProjectService {
 
   getProject(id: number)
   {
-    // const project = this.projects.find(x => x.id === id);
-    // if (project !== undefined){
-    //   return of(project);
-    // }
-
     return this.http.get<IProject>(this.baseUrl + 'projects/' + id);
   }
 
   updateProject(project: IProject)
   {
-      // convert priority to a number
+     const myPriority: number = +project.priority;
+     const myWorkstream: number = +project.workstreamId;
+     project.priority = myPriority;
+     project.workstreamId = myWorkstream;
 
-     const kpriority: number = +project.priority;
-     project.priority = kpriority;
-
-     console.log('Services UPDATE - Projects Priority : ' + project.priority);
-    // console.log('Services UPDATE - Projects : ' + project.id);
-     console.log(project);
      return this.http.put(this.baseUrl + 'projects/' + project.id, project).pipe(
       map(() => {
         console.log('Services UPDATE - Projects : ' + project.name);
@@ -70,28 +57,46 @@ export class ProjectService {
 
   addProject(project: IProject)
   {
-    console.log('Services - Projects : ' + this.projects.length);
+   // console.log('Services - ADD Projects number : ' + this.projects.length);
+   // console.log('Services - Add Project : ' + project.name);
 
-    const kproject: IProject = {
-      id: 0,
-      name: project.name,
-      owner: project.owner,
-      active: true,
-      started: new Date('01/01/2021'),
-      deadline: new Date('01/01/2021'),
-      completed: new Date('01/01/2021'),
-      priority: 1,
-      projectkey: 'Key',
-      projectTypeId: 0
-    };
-
-    console.log('Services - Add Project : ' + kproject.name);
-
-    return this.http.post(this.baseUrl + 'projects/', kproject).pipe(
+    return this.http.post(this.baseUrl + 'projects/', project).pipe(
       map(() => {
-        this.projects.push(kproject);
+       // this.projects.push(project);
       })
     );
   }
 
+  deleteProject(project: IProject)
+  {
+    return this.http.delete(this.baseUrl + 'projects/' + project.id.toString()).pipe(
+      map(() => {
+       // this.projects.push(project);
+      })
+    );
+  }
+
+  getNewProject()
+  {
+    const myNewProject: IProject = {
+      id: 0,
+      name: 'Add Project to Streams',
+      projectKey: '',
+      productId: 1,
+      projectTypeId: 1,
+      workstreamId: 0,
+      OrganisationId: 1,
+      active: true,
+      completed: false,
+      description: '',
+      owner: 'Paul',
+      priority: 1,
+      startDate: new Date('01/01/2020'),
+      // completedDate: new Date('01/01/2020'),
+      deadlineDate: new Date('01/01/2020'),
+      createdDate: new Date('1/1/2020')
+    }
+
+    return myNewProject;
+  }
 }

@@ -1,0 +1,6 @@
+This file contains information, help and references to resources used to build this system 
+
+Building a reusable dialog module with Angular Material
+https://itnext.io/building-a-reusable-dialog-module-with-angular-material-4ce406117918
+
+

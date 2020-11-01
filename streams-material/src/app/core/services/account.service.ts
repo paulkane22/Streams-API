@@ -12,7 +12,7 @@ export class AccountService {
   baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
-  currentUserName = '';
+ // currentUserName = '';
 
 
 
@@ -33,7 +33,7 @@ export class AccountService {
   register(model: any) {
     return this.http.post(this.baseUrl + 'account/register', model).pipe(
       map((user: User) => {
-        if (user) 
+        if (user)
         {
           localStorage.setItem('user', JSON.stringify(user));
           this.currentUserSource.next(user);
@@ -42,24 +42,35 @@ export class AccountService {
     );
   }
 
-  getUserName(): string {
-    // this.currentUser$.subscribe(user => {
-    // this.currentUserName = user.username;
-    // });
-
-    return this.currentUserName;
+  updateUser(model: any) {
+    return this.http.put(this.baseUrl + 'user/update/' + model.username, model).pipe(
+      map((user: User) => {
+        if (user)
+        {
+          localStorage.setItem('user', JSON.stringify(user));
+          this.currentUserSource.next(user);
+          console.log('UPDATED LOCAL USER');
+        }
+      })
+    );
   }
+
+  // getUserName(): string {
+  //   this.currentUser$.subscribe(user => {
+  //   this.currentUserName = user.username;
+  //   });
+
+  //   return this.currentUserName;
+  // }
 
   setCurrentUser(user: User)
   {
     this.currentUserSource.next(user);
-    this.currentUserName = user.username;
   }
 
   logout() {
     console.log('Log out');
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
-    this.currentUserName = '';
   }
 }

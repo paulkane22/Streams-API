@@ -1,19 +1,20 @@
 <mat-progress-bar mode="indeterminate" color="error" *ngIf="busyService.visibility | async"></mat-progress-bar>
+   
 <mat-toolbar color="primary">
   <button
     mat-icon-button
     class="example-icon"
     aria-label="Example icon-button with menu icon"
-    *ngIf="accountService.currentUser$ | async as user"
+    *ngIf="accountService.currentUser$ | async"
     (click)="sidenav.toggle()"
   >
     <mat-icon>menu</mat-icon>
     <!-- <mat-icon>menu_open</mat-icon> -->
   </button>
   <span *ngIf="accountService.currentUser$ | async">Streams</span>
-  <span class="example-spacer"></span>
-  <span *ngIf="accountService.currentUser$ | async"
-    >Welcome {{ username }}</span
+  <span class="toolbar-spacer"></span>
+  <span *ngIf="accountService.currentUser$ | async as user"
+    >Welcome {{user.knownAs | titlecase}}</span
   >
   <button
     mat-icon-button
@@ -27,8 +28,17 @@
 
 
 
+
 <mat-menu x-position="before" #menu="matMenu">
-  <button mat-menu-item *ngIf="accountService.currentUser$ | async">
+  <button mat-menu-item *ngIf="accountService.currentUser$ | async"
+  routerLink="/register"> 
+    
+    <mat-icon>face</mat-icon>
+    Create User
+  </button>
+  <button mat-menu-item *ngIf="accountService.currentUser$ | async"
+  routerLink="/editprofile"> 
+    
     <mat-icon>face</mat-icon>
     Edit Profile
   </button>
@@ -43,6 +53,7 @@
   </button>
 </mat-menu>
 
+<!-- SIDE BAR  -->
 <mat-sidenav-container class="example-container">
   <mat-sidenav
     #sidenav
@@ -54,9 +65,9 @@
         <span>
           <div mat-card-avatar class="my-header-image"></div>      
         </span>
-        <span>
-          <mat-card-title>{{ username }}</mat-card-title>
-          <mat-card-subtitle>Operations</mat-card-subtitle>
+        <span *ngIf="accountService.currentUser$ | async as user">
+          <mat-card-title>{{user.userName | titlecase}}</mat-card-title>
+          <mat-card-subtitle>admin</mat-card-subtitle>
         </span>
         <span class="lock_icon">
           <button
@@ -105,7 +116,7 @@
 
       <a
         mat-list-item
-        routerLink="/projects"
+        routerLink="/project"
         (click)="sidenavClose()"
         routerLinkActive="active"
         ><mat-icon mat-list-icon color="primary">list_alt</mat-icon>Projects</a
@@ -130,11 +141,11 @@
         <mat-icon mat-list-icon color="primary">assessment</mat-icon> Errors
       </a>
     </mat-nav-list>
-
   </mat-card>
   </mat-sidenav>
 
   <mat-sidenav-content>
+    
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

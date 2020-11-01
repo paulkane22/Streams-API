@@ -45,7 +45,7 @@ namespace Streams.API
         {
             Active = true,
             Name = "Test Project",
-            Product = myProduct,
+           // Product = myProduct,
         };
         _context.Projects.Add(myProject);
 

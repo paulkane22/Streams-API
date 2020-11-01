@@ -24,7 +24,7 @@ namespace Streams.API.Data
                 var k = new Project();
                 k.Name = project.Name;
                 k.Active = project.Active;
-                k.Created = System.DateTime.Now;
+               // k.Created = System.DateTime.Now;
 
                 await context.Projects.AddAsync(k);
             }

@@ -22,15 +22,6 @@ export class AppComponent implements OnInit {
     this.setCurrentUser();
   }
 
-    // getProjects() {
-
-    //   this.http.get('http://localhost:56563/api/projects').subscribe(response => {
-    //     this.projects = response;
-    //   }, error => {
-    //     console.log(error);
-    //   });
-    // }
-
     setCurrentUser()
     {
       const user: User = JSON.parse(localStorage.getItem('user'));

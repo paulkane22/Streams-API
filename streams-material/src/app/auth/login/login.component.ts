@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginInvalid = false;
   myError: string;
   model: any;
-  
+
   constructor(
     private accountService: AccountService,
     private router: Router,
@@ -30,16 +30,8 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['./']);
     }, error => {
       console.log(error);
-      //this.myError = 'Invalid username or password';
-      // this.snackBar.open(this.myError, '', 
-      // {
-      //   duration: 2000,
-      //   horizontalPosition: 'center',
-      //   verticalPosition: 'bottom',
-      //   panelClass: ['mat-toolbar', 'mat-primary']
-      // }
-      //);
-      //this.loginInvalid = true;
+      this.myError = 'Invalid username or password';
+      this.loginInvalid = true;
     });
   }
 

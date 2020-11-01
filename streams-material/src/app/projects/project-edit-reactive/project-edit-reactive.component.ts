@@ -31,6 +31,8 @@ export class ProjectEditReactiveComponent implements OnInit {
     this.initialiseForm();
   }
 
+
+
   initialiseForm() {
     // using form builder service
     this.registerForm = this.fb.group({
@@ -39,10 +41,10 @@ export class ProjectEditReactiveComponent implements OnInit {
       owner: [this.myProject.owner, [Validators.required]],
       active: [this.myProject.active],
       priority: [this.myProject.priority.toString()],
-      started: [this.myProject.started, Validators.required ],
-      deadline: [this.myProject.deadline, Validators.required ],
-      completed: [this.myProject.completed, Validators.required ],
-      projectKey: [this.myProject.projectkey ]
+      started: [this.myProject.startDate, Validators.required ],
+      deadline: [this.myProject.deadlineDate, Validators.required ],
+      completed: [this.myProject.completedDate, Validators.required ],
+      projectKey: [this.myProject.projectKey ]
     });
 
     // this.registerForm = new FormGroup({

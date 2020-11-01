@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Streams.API.DTOs;
 using Streams.Common;
@@ -13,11 +14,13 @@ namespace Streams.API.Controllers
     {
         private readonly StreamContext _context;
         private readonly ITokenService _tokenService;
+        private readonly IMapper _mapper;
 
-        public AccountController(StreamContext context, ITokenService tokenService)
+        public AccountController(StreamContext context, ITokenService tokenService, IMapper mapper)
         {
             this._context = context;
             this._tokenService = tokenService;
+            this._mapper = mapper;
         }
 
 
@@ -36,7 +39,8 @@ namespace Streams.API.Controllers
             {
                 UserName = registerDto.UserName.ToLower(),
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                PasswordSalt = hmac.Key
+                PasswordSalt = hmac.Key,
+                KnownAs = registerDto.KnownAs                
             };
 
             _context.AppUsers.Add(user);
@@ -46,7 +50,8 @@ namespace Streams.API.Controllers
             return new UserDto
             {
                 UserName = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
+                KnownAs = user.KnownAs
             };
 
         }
@@ -71,10 +76,14 @@ namespace Streams.API.Controllers
             return new UserDto
             {
                 UserName = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
+                KnownAs = user.KnownAs
             };
 
         }
+
+ 
+
 
         private async Task<bool> UserExists(string username)
         {

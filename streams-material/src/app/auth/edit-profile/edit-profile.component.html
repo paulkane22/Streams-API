@@ -1,0 +1,39 @@
+<div class="container-fluid">
+
+  <div class="container">
+  <mat-card>
+    <img src="../../../assets/images/streams_logo100.png" />
+    <mat-card-title class="pt-2">
+      <h2 color="primary">Edit Profile</h2>
+    </mat-card-title>
+
+    <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()"   autocomplete="off" >
+    <mat-card-content>
+      <!-- <app-text-input 
+      [formControl]="editProfileForm.controls['username']"
+      [label]="'Username:'" readonly></app-text-input> -->
+        
+        <mat-form-field class="full-width-input">
+          <input matInput 
+          formControlName="knownAs"
+          type="text" 
+          placeholder="Known As" 
+          required>
+          <mat-error>
+            Please provide your nick name
+          </mat-error>
+        </mat-form-field>
+    </mat-card-content>
+  
+    <mat-dialog-actions align="end">
+      
+      <button mat-raised-button cdkFocusInitial color="primary" type="submit" [disabled]="editProfileForm.invalid" >Update</button>
+      <!-- <button mat-button [mat-dialog-close] >Cancel</button> -->
+    </mat-dialog-actions> 
+  </form>
+  </mat-card>
+  </div>
+
+
+  <!-- <p>Form status: {{editProfileForm.status}}</p>
+  <p>Form status: {{editProfileForm.value}}</p> -->

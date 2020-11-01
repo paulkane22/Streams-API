@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { EditProfileComponent } from './auth/edit-profile/edit-profile.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthGuard } from './auth/_guards/auth.guard';
@@ -13,10 +14,16 @@ const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
+  { path: 'editprofile', component: EditProfileComponent, canActivate: [AuthGuard] },
+
   { path: 'projects',
     loadChildren: () =>
       import('./projects/projects-routing.module').then(m => m.ProjectsRoutingModule),
   },
+  { path: 'project',
+  loadChildren: () =>
+    import('./project/project-routing.module').then(m => m.ProjectRoutingModule),
+},
   { path: 'tasks',
     loadChildren: () =>
       import('./tasks/tasks-routing.module').then(m => m.TasksRoutingModule),

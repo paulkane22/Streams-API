@@ -7,25 +7,25 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { NavigationExtras, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError } from 'rxjs/operators';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router, private snackbar: MatSnackBar) {}
+  constructor(private router: Router, private notificationService: NotificationService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError(error => {
-        if(error) {
+        if (error) {
           switch (error.status) {
             case 400:
-              if(error.error.errors)
+              if (error.error.errors)
               {
                 const modalStateErrors = [];
                 for (const key in error.error.errors) {
-                  if(error.error.errors[key]) {
+                  if (error.error.errors[key]) {
                     modalStateErrors.push(error.error.errors[key]);
                   }
                 }
@@ -33,28 +33,31 @@ export class ErrorInterceptor implements HttpInterceptor {
               }
               else
               {
-                this.snackbar.open(error.statusText, error.status, 
-                  {
-                    duration: 2000,
-                    horizontalPosition: 'center',
-                    verticalPosition: 'bottom',
-                    panelClass: ['mat-toolbar', 'mat-primary']
-                  }
-                  );
+                this.notificationService.openSnackBar(error.statusText);
+
+                // this.snackbar.open(error.statusText, error.status,
+                //   {
+                //     duration: 2000,
+                //     horizontalPosition: 'center',
+                //     verticalPosition: 'bottom',
+                //     panelClass: ['mat-toolbar', 'mat-primary']
+                //   }
+                //   );
               }
               break;
             case 401:
-
-              this.snackbar.open(error.statusText, error.status, 
-              {
-                duration: 2000,
-                horizontalPosition: 'center',
-                verticalPosition: 'bottom',
-                panelClass: ['mat-toolbar', 'mat-primary']
-              }
-              );
+              this.notificationService.openSnackBar(error.statusText);
+              // this.snackbar.open(error.statusText, error.status,
+              // {
+              //   duration: 2000,
+              //   horizontalPosition: 'center',
+              //   verticalPosition: 'bottom',
+              //   panelClass: ['mat-toolbar', 'mat-primary']
+              // }
+              // );
               break;
             case 404:
+              this.notificationService.openSnackBar('Not FOUND');
               this.router.navigateByUrl('/not-found');
               break;
             case 500:
@@ -62,7 +65,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.router.navigateByUrl('/server-error', navigationExtras);
               break;
             default:
-              this.snackbar.open('something unexpected went wrong');
+              this.notificationService.openSnackBar('Something unexpected went wrong');
               console.log(error);
               break;
           }

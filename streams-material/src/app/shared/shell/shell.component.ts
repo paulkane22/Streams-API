@@ -7,9 +7,9 @@ import { AccountService } from 'src/app/core/services/account.service';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/app/_models/user';
 import { BusyService } from 'src/app/core/services/busy.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Component({
   selector: 'app-shell',
@@ -19,10 +19,7 @@ import { BusyService } from 'src/app/core/services/busy.service';
 export class ShellComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MatSidenav;
 
-  opened = true;
-  myTaskNumber = 5;
-  username = 'Paul';
-  user: User;
+  opened = false;
   sidebarLocked = true;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Handset])
@@ -35,7 +32,7 @@ export class ShellComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     public accountService: AccountService,
     private router: Router,
-    private snackBar: MatSnackBar,
+    private notification: NotificationService,
     public busyService: BusyService) {}
 
   ngOnInit(): void {
@@ -47,11 +44,15 @@ export class ShellComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
 
+
+
   toggleSidebarLock()
   {
+    
     this.sidebarLocked = !this.sidebarLocked;
     this.sidenavClose();
   }
+
   sidenavClose()
   {
     if (this.sidebarLocked === false)

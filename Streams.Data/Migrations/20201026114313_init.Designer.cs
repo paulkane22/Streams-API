@@ -10,8 +10,8 @@ using Streams.Data;
 namespace Streams.Data.Migrations
 {
     [DbContext(typeof(StreamContext))]
-    [Migration("20201016071413_addProjectType")]
-    partial class addProjectType
+    [Migration("20201026114313_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -114,6 +114,18 @@ namespace Streams.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Organisations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "PJK"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "MDSAS"
+                        });
                 });
 
             modelBuilder.Entity("Streams.Common.Product", b =>
@@ -140,6 +152,16 @@ namespace Streams.Data.Migrations
                     b.HasIndex("WorkstreamId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Active = true,
+                            Name = "Streams",
+                            WorkstreamId = 1,
+                            productType = 0
+                        });
                 });
 
             modelBuilder.Entity("Streams.Common.Project", b =>
@@ -152,20 +174,27 @@ namespace Streams.Data.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("Completed")
+                    b.Property<bool>("Completed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("CompletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Deadline")
+                    b.Property<DateTime?>("DeadlineDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("OrganisationId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Owner")
                         .HasColumnType("nvarchar(max)");
@@ -173,17 +202,24 @@ namespace Streams.Data.Migrations
                     b.Property<int>("Priority")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<string>("ProjectKey")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(6)")
+                        .HasMaxLength(6);
 
-                    b.Property<int>("ProjectTypeId")
+                    b.Property<int?>("ProjectTypeId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Started")
+                    b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("TimeStamp")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<int?>("WorkstreamId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -216,6 +252,15 @@ namespace Streams.Data.Migrations
                     b.HasIndex("OrganisationId");
 
                     b.ToTable("Workstreams");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Active = false,
+                            Name = "Streams",
+                            OrganisationId = 1
+                        });
                 });
 
             modelBuilder.Entity("Streams.Common.Model.AppTask", b =>
@@ -238,11 +283,9 @@ namespace Streams.Data.Migrations
 
             modelBuilder.Entity("Streams.Common.Project", b =>
                 {
-                    b.HasOne("Streams.Common.Product", "Product")
+                    b.HasOne("Streams.Common.Product", null)
                         .WithMany("Projects")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("Streams.Common.Workstream", b =>

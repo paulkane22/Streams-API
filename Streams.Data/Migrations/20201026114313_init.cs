@@ -8,6 +8,25 @@ namespace Streams.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "AppUsers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(nullable: true),
+                    PasswordHash = table.Column<byte[]>(nullable: true),
+                    PasswordSalt = table.Column<byte[]>(nullable: true),
+                    DateOfBirth = table.Column<DateTime>(nullable: false),
+                    KnownAs = table.Column<string>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    LastActive = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Organisations",
                 columns: table => new
                 {
@@ -70,12 +89,22 @@ namespace Streams.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    ProjectKey = table.Column<string>(maxLength: 6, nullable: true),
+                    ProjectTypeId = table.Column<int>(nullable: true),
+                    ProductId = table.Column<int>(nullable: true),
+                    WorkstreamId = table.Column<int>(nullable: true),
+                    OrganisationId = table.Column<int>(nullable: true),
                     Active = table.Column<bool>(nullable: false),
-                    Deadline = table.Column<DateTime>(nullable: false),
-                    Started = table.Column<DateTime>(nullable: false),
-                    Completed = table.Column<DateTime>(nullable: false),
-                    ProductId = table.Column<int>(nullable: false)
+                    Completed = table.Column<bool>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    Owner = table.Column<string>(nullable: true),
+                    Priority = table.Column<int>(nullable: false),
+                    DeadlineDate = table.Column<DateTime>(nullable: true),
+                    StartDate = table.Column<DateTime>(nullable: true),
+                    CompletedDate = table.Column<DateTime>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    TimeStamp = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -85,7 +114,7 @@ namespace Streams.Data.Migrations
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -117,6 +146,26 @@ namespace Streams.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Organisations",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "PJK" });
+
+            migrationBuilder.InsertData(
+                table: "Organisations",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 2, "MDSAS" });
+
+            migrationBuilder.InsertData(
+                table: "Workstreams",
+                columns: new[] { "Id", "Active", "Name", "OrganisationId", "Owner" },
+                values: new object[] { 1, false, "Streams", 1, null });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "Active", "Name", "WorkstreamId", "productType" },
+                values: new object[] { 1, true, "Streams", 1, 0 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AppTasks_ProjectId",
                 table: "AppTasks",
@@ -142,6 +191,9 @@ namespace Streams.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "AppTasks");
+
+            migrationBuilder.DropTable(
+                name: "AppUsers");
 
             migrationBuilder.DropTable(
                 name: "Projects");

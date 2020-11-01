@@ -10,12 +10,6 @@ import {MatRadioModule} from '@angular/material/radio';
 import { ProjectItemComponent } from './project-item/project-item.component';
 import { ProjectEditFormComponent } from './project-edit-form/project-edit-form.component';
 import { ProjectEditReactiveComponent } from './project-edit-reactive/project-edit-reactive.component';
-import { TextInputComponent } from '../_forms/text-input/text-input.component';
-import { DateInputComponent } from '../_forms/date-input/date-input.component';
-
-
-
-
 
 @NgModule({
   declarations: [
@@ -24,8 +18,6 @@ import { DateInputComponent } from '../_forms/date-input/date-input.component';
     ProjectItemComponent,
     ProjectEditFormComponent,
     ProjectEditReactiveComponent,
-    TextInputComponent,
-    DateInputComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +27,6 @@ import { DateInputComponent } from '../_forms/date-input/date-input.component';
     ProjectsRoutingModule,
     MatTabsModule,
     MatRadioModule,
-
   ]
 })
 export class ProjectsModule { }

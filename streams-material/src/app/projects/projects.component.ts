@@ -2,9 +2,6 @@ import { Component, ViewChild, AfterViewInit, ChangeDetectorRef, OnInit  } from 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import {HttpClient} from '@angular/common/http';
-
-import {merge, Observable, of as observableOf} from 'rxjs';
-import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 import { ProjectService } from '../core/services/project.service';
 import { IProject } from '../_models/project';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';

@@ -1,10 +1,21 @@
+<div class="container-fluid">
 
+    <div class="row" *ngIf="(accountService.currentUser$ | async) !== null">
+        <div class="col-12 d-flex align-items-center flex-column pt-3">
+            <img src="../../assets/images/streams_logo100.png" />
+            <h1>Streams</h1>
+            <p>Welcome Stream Manager</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <app-login  *ngIf="(accountService.currentUser$ | async) === null"></app-login>
+        </div>
+    </div>
+</div>
 <div class="hero" >
-    <img src="../../assets/images/streams_logo100.png" />
-    <h1>Streams</h1>
-    <p>Welcome Stream Manager
-    </p>
+
 </div>
 
-<app-login  *ngIf="(accountService.currentUser$ | async) === null"></app-login>
+
 

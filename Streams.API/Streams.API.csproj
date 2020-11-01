@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\projectController_OLD.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Data\UserSeedJson.json" />
   </ItemGroup>
 

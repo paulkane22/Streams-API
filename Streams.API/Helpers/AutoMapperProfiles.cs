@@ -9,7 +9,7 @@ namespace Streams.API.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<Project, ProjectDto>();
-
+            CreateMap<AppUser, UserDto>();
         }
     }
 }

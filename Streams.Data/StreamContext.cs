@@ -24,5 +24,10 @@ namespace Streams.Data
         //        "Data Source =.; Initial Catalog = Streams; Integrated Security = True"
         //        );
         //}
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Seed();
+        }
     }
 }

@@ -29,7 +29,9 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {MatToolbarModule } from '@angular/material/toolbar';
 import {MatNativeDateModule } from '@angular/material/core';
-
+import { TextInputComponent } from '../_forms/text-input/text-input.component';
+import { DateInputComponent } from '../_forms/date-input/date-input.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 const components = [ShellComponent];
@@ -62,16 +64,20 @@ const modules = [
   MatSortModule,
   MatTableModule,
   MatToolbarModule,
+  FormsModule,
+  ReactiveFormsModule
 ];
 
 @NgModule({
-  declarations: [ShellComponent],
+  declarations: [ShellComponent, TextInputComponent, DateInputComponent],
   imports: [
     modules,
   ],
   exports: [
     components,
-    modules
+    modules,
+    TextInputComponent,
+    DateInputComponent
   ]
 })
 export class SharedModule { }

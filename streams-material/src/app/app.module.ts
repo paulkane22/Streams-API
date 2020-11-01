@@ -21,8 +21,10 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { ProjectsModule } from './projects/projects.module';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
+import { ProjectModule } from './project/project.module';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
-
+import { ConfirmDialogComponent } from './_forms/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,16 +33,16 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
     TestErrorsComponent,
     NotFoundComponent,
     ServerErrorComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
     SharedModule,
     CoreModule,
     TasksModule,
     ProjectsModule,
+    ProjectModule,
     AuthModule,
     AppRoutingModule,
     HttpClientModule,
@@ -49,7 +51,8 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ],
   bootstrap: [AppComponent],
   entryComponents: [
